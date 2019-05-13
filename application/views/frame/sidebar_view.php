@@ -15,19 +15,20 @@
                             <li>
                                 <a href="#"><i class="fa fa-user fa-fw"></i> Administrador<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
+                                    <li> <a href="<?=base_url('admin/games_list_admin')?>">&raquo; Administrar Jogos</a> </li>
                                     <li> <a href="<?=base_url('admin/user_list')?>">&raquo; Listar Usuarios</a> </li>
                                     <li> <a href="<?=base_url('admin/log_atv')?>">&raquo; Activity Log</a> </li>
                                 </ul>
                             </li>
                         <?php endif; ?>
+                        <?php if($this->session->userdata('grupo') == 'user' || $this->session->userdata('grupo') == 'admin')  : ?>
                         <li>
-                            <a href="#"><i class="fa fa-user fa-fw"></i> Other Menu Sample<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> Meus jogos Cadastrados<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li> <a href="#">&raquo; Menu exemplo 2</a> </li>
-                                <li> <a href="#">&raquo; Menu exemplo 2</a> </li>
+                                <li> <a href="#">&raquo; Listar jogos</a> </li>
                             </ul>
                         </li>
-                  
+                        <?php endif; ?>
                         
                     </ul>
                 </div>

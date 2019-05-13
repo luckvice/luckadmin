@@ -1,4 +1,4 @@
-    <div class="col-lg-12 text-center" style="padding:5px;"><small>&copy; 2017 by <a target="_blank" href="http://rudiliu.com">Rudi Liu</a></small></div>
+    <div class="col-lg-12 text-center" style="padding:5px;"><small>&copy; 2017 by <a target="_blank" href="#">Luck</a></small></div>
     </div>
     <!-- /#wrapper -->
 

@@ -2,27 +2,30 @@
     window.onload = escondeErrorMessages();
 
     function escondeErrorMessages(){
-        $("#error_email").hide();
-        $("#error_email2").hide();
-        $("#error_email3").hide();
-        $("#error_nome").hide();
-        $("#error_nome2").hide();
-        $("#error_grupo").hide();
-        $("#edit_img-error").hide();
-        $("#url_img_error").hide();
+        $("#error-edit-jogo").hide();
+        $("#error-edit-jogo2").hide();
+        $("#edit-error_desenvolvedora").hide();
+        $("#edit-error_publishers").hide();
+        $("#edit-error_plataformas").hide();
         $("#edit-error_email").hide();
         $("#edit-error_email2").hide();
         $("#edit-error_email3").hide();
-        $("#error-editarNomeUsuario").hide();
-        $("#error-editarNomeUsuario2").hide();
-        $("#edit-error_grupo").hide();
+
+        $("#error-new-jogo").hide();
+        $("#error-new-jogo2").hide();
+        $("#new-error_desenvolvedora").hide();
+        $("#new-error_publishers").hide();
+        $("#new-error_plataformas").hide();
+        $("#new-error_email").hide();
+        $("#new-error_email2").hide();
+        $("#new-error_email3").hide();
         hide_loading();
     }
 
     $(document).ready( function () {
 
         //$('#dataTables-user-log').DataTable();
-        $('#dataTables-user-list').DataTable({
+        $('#dataTables-games-list').DataTable({
             "bFilter": true,
             "paging":   false,
             //"iDisplayLength": 20,
@@ -31,34 +34,31 @@
         });
      } );
 
-    function editar_usuario_popup(email,id,nome,grupo,edit_img){
-        $( "#edit-email" ).val(email);
-        $( "#edit-user-id" ).val(id);
-        $( "#edit-nome" ).val(nome);
-        $( "#edit_img" ).val(edit_img);
+    function editar_jogo_popup(id, jogo, plataforma, desenvolvedor, dev_id, publisher, ps_id, plataforma, p_id,){
+        $( "#edit-jogo" ).val(jogo);
+        $( "#edit-jogo-id" ).val(id);
+        $( "#edit-desenvolvedora" ).val(desenvolvedor);
+        $( "#dev_id" ).val(dev_id);
+        $( "#edit_plataforma" ).val(plataforma);
+        $( "#edit_publisher" ).val(publisher);
 
-        if(grupo=='admin')
-             optGrupo = "<option value='admin' selected>Admin</option><option value='user'>User</option>";
-        else optGrupo = "<option value='admin'>Admin</option><option value='user' selected>User</option>";
-
-        $( "#edit-grupo" ).html(optGrupo);
-        $('#editarUsuarioSubmit').attr("onclick","update_usuario("+id+")");
+    
+        desenvolvedora = "<option value='"+dev_id+"' selected>"+desenvolvedor+" Selecionado</option>";
+        $( "#edit-desenvolvedora" ).empty;
+        $( "#edit-desenvolvedora" ).append(desenvolvedora);
+        $('#editarJogoSubmit').attr("onclick","update_jogo("+id+")");
     }
 
-    function desativarUsuarioConfirmaBox(email,id){
-        $( "#user-email" ).html(email);
-        $('#deactivateYesButton').attr("onclick","desativaUsuarioSubmit('"+email+"',"+id+")");
+    function desativaGame(jogo,id){
+        $( "#jogo-mensagem" ).html(jogo);
+        $('#deactivateYesButton').attr("onclick","desativaGameSubmit('"+jogo+"',"+id+")");
     }
 
-    function resetaPassBox(email,id){
-        $( "#reset-user-email" ).html(email);
-        $('#resetYesButton').attr("onclick","reset_submit('"+email+"',"+id+")");
-    }
-    //Não deleta usuario somente desativa
-    function desativaUsuarioSubmit(email,id){
+    //Não deleta jogo somente desativa
+    function desativaGameSubmit(jogo,id){
         show_loading();
             $.ajax({
-            url: $("#base-url").val()+"admin/desativar_usuario/"+email+"/"+id,
+            url: $("#base-url").val()+"admin/desativarGame/"+jogo+"/"+id,
             cache: false,
             success: function (result) {
                 var result = $.parseJSON(result);
@@ -91,11 +91,11 @@
         });
     }
 
-    function update_usuario(id){
+    function update_jogo(id){
         escondeErrorMessages();
         show_loading();
         var i=0;
-        var nome = $('#edit-nome').val().trim();
+        var nome = $('#edit-jogo').val().trim();
         var email = $('#edit-email').val().trim();
         var grupo = $('#edit-grupo').val();
 
@@ -127,11 +127,11 @@
 
         if(i == 0){
             $.ajax({
-                url: $("#base-url").val()+"admin/update_usuario/",
+                url: $("#base-url").val()+"admin/update_jogo/",
                 traditional: true,
                 type: "post",
                 dataType: "text",
-                data: {email: email, id:id, nome:nome, grupo:grupo},
+                data: {jogo: jogo, desenvolvedora:desenvolvedora, plataforma:plataforma, desenvolvedora:desenvolvedora, publishers:publishers},
                 success: function (result) {
                     var result = $.parseJSON(result);
                     if(result.status=='success'){
@@ -158,8 +158,8 @@
     $( "#newUserSubmit" ).click(function() {
         escondeErrorMessages();
         show_loading();
-        var i=0;
-        var nome = $('#nome').val().trim();
+       var i=0;
+       /*  var nome = $('#nome').val().trim();
         var email = $('#email').val().trim();
         var grupo = $('#grupo').val();
         var url_img = $('#url_img').val();
@@ -186,14 +186,14 @@
             $("#error_grupo").show();
             i++;
         }
-
+*/
         if(i == 0){
             $.ajax({
-                url: $("#base-url").val() + "admin/create_usuario",
+                url: $("#base-url").val() + "admin/novo_jogo",
                 traditional: true,
                 type: "post",
                 dataType: "text",
-                data: {email:email, grupo:grupo, nome:nome, url_img:url_img},
+                data: {njogo: njogo, new_desenvolvedora:new_desenvolvedora, new_plataformas:new_plataformas, new_publishers:new_publishers},
                 success: function (result) {
                     var result = $.parseJSON(result);
                     if(result.status=='success'){

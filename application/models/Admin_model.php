@@ -12,6 +12,79 @@ class Admin_model extends CI_Model {
     }
 
 
+ /* Games list admin */
+
+    function get_games_list(){
+        //$this->db->select('*');
+        //$this->db->from('jogos');
+        //$this->db->where('status', 1);
+        //$query=$this->db->get();
+        $query=$this->db->query("SELECT 
+        j.id as jogo_id, 
+        d.id as dev_id,
+        ps.id as ps_id,
+        j.nome as nome, 
+        p.nome as plataforma, 
+        d.nome as desenvolvedora, 
+        ps.nome as publisher  
+            FROM jogos j
+                LEFT JOIN plataformas 	as p 	ON j.plataform_id = p.id
+                LEFT JOIN desenvolvedor as d 	ON d.id = j.desenv_id
+                LEFT JOIN publishers 	as ps ON ps.id = j.publisher_id
+                where j.status=1");
+        return $query->result();
+    }
+
+    function get_categorias_list(){
+        $this->db->select('*');
+        $this->db->from('categorias');
+        //$this->db->where('status', 1);
+        $query=$this->db->get();
+        return $query->result();
+    }
+
+    function get_plataformas_list(){
+        $this->db->select('*');
+        $this->db->from('plataformas');
+        //$this->db->where('status', 1);
+        $query=$this->db->get();
+        return $query->result();
+    }
+
+
+    function get_desenvolvedor_list(){
+        $this->db->select('*');
+        $this->db->from('desenvolvedor');
+        //$this->db->where('status', 1);
+        $query=$this->db->get();
+        return $query->result();
+    }
+
+    function get_publishers_list(){
+        $this->db->select('*');
+        $this->db->from('publishers');
+        //$this->db->where('status', 1);
+        $query=$this->db->get();
+        return $query->result();
+    }
+
+    function get_total_users_list(){
+        $this->db->select('*');
+        $this->db->from('usuario');
+        $this->db->where('status', 1);
+        $query=$this->db->get();
+        return $query->num_rows();
+    }
+
+    function get_total_jogos_list(){
+        $this->db->select('*');
+        $this->db->from('jogos');
+        $this->db->where('status', 1);
+        $query=$this->db->get();
+        return $query->num_rows();
+    }
+
+
     function get_user_list(){
         $this->db->select('*');
         $this->db->from('usuario');
@@ -28,6 +101,7 @@ class Admin_model extends CI_Model {
         return $query->result_array();
     }
 
+
     function validate_email($postData){
         $this->db->where('email', $postData['email']);
         $this->db->where('status', 1);
@@ -38,6 +112,34 @@ class Admin_model extends CI_Model {
             return true;
         else
             return false;
+    }
+
+    function insert_jogo($postData){
+
+      
+
+
+ 
+            $data = array(
+                'jogo' => $postData['nome'],
+                'desenveolvedora' => $postData['desenvolvedora'],
+                'publishers' => $postData['publishers'],
+                'plataformas' => $postData['plataformas'],
+            );
+              
+ 
+      
+            $this->db->insert('jogos', $data);
+
+            $module = "Gerenciamento de jogos";
+            $activity = "add new game ".$postData['jogo'];
+            $this->insert_log($activity, $module);
+            return array('status' => 'success', 'message' => '');
+
+      
+         //   return array('status' => 'exist', 'message' => '');
+        
+
     }
 
     function insert_user($postData){
@@ -54,7 +156,7 @@ class Admin_model extends CI_Model {
                 'senha' => md5($password),
                 'criado_em' => date('Y\-m\-d\ H:i:s A'),
             );
-            echo var_dump($data);
+      
             $this->db->insert('usuario', $data);
 
             $message = "Detalhes da sua conta:<br><br>Email: ".$postData['email']."<br>Senha temporaria: ".$password."<br>Não esqueça de trocar sua senha ao logar.<br><br> Você pode logar em".base_url().".";
@@ -113,6 +215,20 @@ class Admin_model extends CI_Model {
 
         $module = "Gerenciamento de usuarios";
         $activity = "delete user ".$email;
+        $this->insert_log($activity, $module);
+        return array('status' => 'success', 'message' => '');
+
+    }
+    function desativaGame_model($jogo,$id){
+
+        $data = array(
+            'status' => 0,
+        );
+        $this->db->where('id', $id);
+        $this->db->update('jogos', $data);
+
+        $module = "Gerenciamento de jogos";
+        $activity = "delete game ".$jogo;
         $this->insert_log($activity, $module);
         return array('status' => 'success', 'message' => '');
 

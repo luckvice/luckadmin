@@ -40,8 +40,8 @@
                                 
                                 <td>
                                     <a class="btn btn-primary" id="user-edit"  onclick="editar_usuario_popup('<?=$row->email?>','<?=$row->user_id?>','<?=$row->nome?>','<?=$row->grupo?>','<?=$row->url_img?>');" data-toggle="modal" data-target="#editarUsuario"> Editar </a>
-                                    <a class="btn btn-warning" id="user-riset" onclick="reset_confirmation('<?=$row->email?>','<?=$row->user_id?>')" data-toggle="modal" data-target="#resetConfirm"> Resetar Senha </a>
-                                    <a class="btn btn-danger" id="user-delete" onclick="deactivate_confirmation('<?=$row->email?>','<?=$row->user_id?>');" data-toggle="modal" data-target="#deactivateConfirm"> Deletar </a>
+                                    <a class="btn btn-warning" id="user-riset" onclick="resetaPassBox('<?=$row->email?>','<?=$row->user_id?>')" data-toggle="modal" data-target="#resetConfirm"> Resetar Senha </a>
+                                    <a class="btn btn-danger" id="user-delete" onclick="desativarUsuarioConfirmaBox('<?=$row->email?>','<?=$row->user_id?>');" data-toggle="modal" data-target="#deactivateConfirm"> Deletar </a>
                                     
                                 </td>
 
@@ -142,7 +142,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Imagem avatar url</label> &nbsp;&nbsp;
-                                    <label class="error" id="edit_img"> Campo Obrigatorio</label>
+                                    <label class="error" id="url_img_error"> Campo Obrigatorio</label>
                                     <input class="form-control" id="url_img" placeholder="img" name="url_img" type="text" autofocus>
                                 </div> 
                             </div>  
