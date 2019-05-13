@@ -35,17 +35,17 @@
      } );
 
     function editar_jogo_popup(id, jogo, plataforma, desenvolvedor, dev_id, publisher, ps_id, plataforma, p_id,){
-        $( "#edit-jogo" ).val(jogo);
-        $( "#edit-jogo-id" ).val(id);
-        $( "#edit-desenvolvedora" ).val(desenvolvedor);
+        $( "#ejogo-id" ).val(id);
+        $( "#ejogo" ).val(jogo);
+        $( "#edesenvolvedora" ).val(desenvolvedor);
         $( "#dev_id" ).val(dev_id);
-        $( "#edit_plataforma" ).val(plataforma);
-        $( "#edit_publisher" ).val(publisher);
+        $( "#eplataforma" ).val(plataforma);
+        $( "#epublisher" ).val(publisher);
 
     
         desenvolvedora = "<option value='"+dev_id+"' selected>"+desenvolvedor+" Selecionado</option>";
-        $( "#edit-desenvolvedora" ).empty;
-        $( "#edit-desenvolvedora" ).append(desenvolvedora);
+        $( "#edesenvolvedora" ).empty;
+        $( "#edesenvolvedora" ).append(desenvolvedora);
         $('#editarJogoSubmit').attr("onclick","update_jogo("+id+")");
     }
 
@@ -95,43 +95,20 @@
         escondeErrorMessages();
         show_loading();
         var i=0;
-        var nome = $('#edit-jogo').val().trim();
-        var email = $('#edit-email').val().trim();
-        var grupo = $('#edit-grupo').val();
+        var ejogo = $('#ejogo').val();
+        var edesenvolvedora = $('#edesenvolvedora').val();
+        var eplataforma = $('#epublishers').val();
+        var epublishers = $('#epublishers').val();
 
 
-        if(nome == ""){
-            $("#error-editarNomeUsuario").show();
-            i++;
-        }
-        else if (!nome.match(/^[A-Za-z0-9\s]+$/)) {
-            $("#error-editarNomeUsuario2").show();
-            i++;
-        }
-
-        if(email == ""){
-            $("#edit-error_email").show();
-            i++;
-        }
-        else if (!email.match(/^[\w -._]+@[\-0-9a-zA-Z_.]+?\.[a-zA-Z]{2,3}$/)) {
-            $("#edit-error_email3").show();
-            i++;
-        }
-
-        if(grupo == 0){
-            $("#edit-error_grupo").show();
-            i++;
-        }
-
-
-
+       
         if(i == 0){
             $.ajax({
                 url: $("#base-url").val()+"admin/update_jogo/",
                 traditional: true,
                 type: "post",
                 dataType: "text",
-                data: {jogo: jogo, desenvolvedora:desenvolvedora, plataforma:plataforma, desenvolvedora:desenvolvedora, publishers:publishers},
+                data: {ejogo: ejogo, edesenvolvedora:edesenvolvedora, eplataforma:eplataforma, epublishers:epublishers},
                 success: function (result) {
                     var result = $.parseJSON(result);
                     if(result.status=='success'){
@@ -155,38 +132,17 @@
 
 
 
-    $( "#newUserSubmit" ).click(function() {
+    $( "#newGameSubmit" ).click(function() {
         escondeErrorMessages();
         show_loading();
        var i=0;
-       /*  var nome = $('#nome').val().trim();
-        var email = $('#email').val().trim();
-        var grupo = $('#grupo').val();
-        var url_img = $('#url_img').val();
-
-        if(nome == ""){
-            $("#error_nome").show();
-            i++;
-        }
-        else if (!nome.match(/^[A-Za-z0-9\s]+$/)) {
-            $("#error_nome2").show();
-            i++;
-        }
-
-        if(email == ""){
-            $("#error_email").show();
-            i++;
-        }
-        else if (!email.match(/^[\w -._]+@[\-0-9a-zA-Z_.]+?\.[a-zA-Z]{2,3}$/)) {
-            $("#error_email3").show();
-            i++;
-        }
-
-        if(grupo == 0){
-            $("#error_grupo").show();
-            i++;
-        }
-*/
+       var njogo = $('#njogo').val();
+       var new_desenvolvedora = $('#new_desenvolvedora').val();
+       var new_plataformas = $('#new_plataformas').val();
+       var new_publishers = $('#new_publishers').val();
+       //var status = 1;
+       
+    
         if(i == 0){
             $.ajax({
                 url: $("#base-url").val() + "admin/novo_jogo",
@@ -196,6 +152,7 @@
                 data: {njogo: njogo, new_desenvolvedora:new_desenvolvedora, new_plataformas:new_plataformas, new_publishers:new_publishers},
                 success: function (result) {
                     var result = $.parseJSON(result);
+                    console.log(result);
                     if(result.status=='success'){
                         location.reload();
                     }

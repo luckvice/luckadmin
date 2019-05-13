@@ -50,11 +50,11 @@ class Authentication extends CI_Controller {
      
     }
 
-    function change_password(){
+    function mudar_senha(){
         $this->ajax_checking();
 
         $postData = $this->input->post();
-        $update = $this->Auth_model->change_password($postData);
+        $update = $this->Auth_model->mudar_senha($postData);
         if($update['status'] == 'success')
             $this->session->set_flashdata('success', 'Sua senha foi alterada com sucesso!');
 

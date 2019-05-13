@@ -101,7 +101,13 @@ class Admin_model extends CI_Model {
         return $query->result_array();
     }
 
-
+    function get_game_by_id($jogoID){
+        $this->db->select('*');
+        $this->db->from('jogos');
+        $this->db->where('id', $jogoID);
+        $query=$this->db->get();
+        return $query->result_array();
+    }
     function validate_email($postData){
         $this->db->where('email', $postData['email']);
         $this->db->where('status', 1);
@@ -116,15 +122,14 @@ class Admin_model extends CI_Model {
 
     function insert_jogo($postData){
 
-      
 
-
- 
             $data = array(
-                'jogo' => $postData['nome'],
-                'desenveolvedora' => $postData['desenvolvedora'],
-                'publishers' => $postData['publishers'],
-                'plataformas' => $postData['plataformas'],
+                'nome'          => $postData['njogo'],
+                'desenv_id'     => $postData['new_desenvolvedora'],
+                'publisher_id'  => $postData['new_publishers'],
+                'cat_id'        =>   1,
+                'status'        =>  1,
+                'plataform_id'  => $postData['new_plataformas'],
             );
               
  
@@ -132,12 +137,38 @@ class Admin_model extends CI_Model {
             $this->db->insert('jogos', $data);
 
             $module = "Gerenciamento de jogos";
-            $activity = "add new game ".$postData['jogo'];
+            $activity = "add new game ".$postData['njogo'];
             $this->insert_log($activity, $module);
             return array('status' => 'success', 'message' => '');
 
       
-         //   return array('status' => 'exist', 'message' => '');
+            return array('status' => 'exist', 'message' => '');
+        
+
+    }
+
+    function update_jogo($postData){
+
+        //$oldData = $this->get_jogo_by_id($postData['idGame']);
+
+
+            $data = array(
+                'nome'          => $postData['ejogo'],
+                'desenv_id'     => $postData['edesenvolvedora'],
+                'publishers_id' => $postData['epublishers'],
+                'plataform_id'  => $postData['eplataformas'],
+         
+            );
+            $this->db->where('id', $postData['edit-jogo-id']);
+            $this->db->update('jogos', $data);
+
+            $module = "Gerenciamento de jogos";
+            $activity = "Update new game ".$postData['ejogo'];
+            $this->insert_log($activity, $module);
+            return array('status' => 'success', 'message' => '');
+
+      
+            return array('status' => 'exist', 'message' => '');
         
 
     }

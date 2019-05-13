@@ -183,7 +183,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button id="newUserSubmit" type="button" class="btn btn-primary">Criar</button>
+                        <button id="newGameSubmit" type="button" class="btn btn-primary">Criar</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -208,7 +208,7 @@
                                     <label>Nome</label> &nbsp;&nbsp;
                                     <label class="error" id="error-edit-jogo"> Campo Obrigatorio</label>
                                     <label class="error" id="error-edit-jogo2"> O nome deve ser alphanumerico</label>
-                                    <input class="form-control" id="edit-jogo" placeholder="Jogo" name="edit-jogo" type="text" autofocus>
+                                    <input class="form-control" id="ejogo" placeholder="Jogo" name="ejogo" type="text" autofocus>
                                 </div> 
                             </div>
                             <div class="col-lg-6">
@@ -222,7 +222,7 @@
                                      ?>
                                     <label class="error" id="edit-error_desenvolvedora"> Campo Obrigatorio</label>
                                     <input  name="dev_id" id="dev_id" type="hidden" value="">
-                                    <select name="desenvolvedora" id="edit-desenvolvedora" class="form-control" >
+                                    <select name="edesenvolvedora" id="edesenvolvedora" class="form-control" >
                                     
                                         <?php   foreach($desenvolvedoras as $row): ?>
                                             <option value="<?php echo $row->id ?>"> <?php echo $row->nome;?></option>
@@ -234,7 +234,7 @@
                             <div class="form-group">
                                     <label>Publisher</label>&nbsp;&nbsp;
                                     <label class="error" id="edit-error_publishers"> Campo Obrigatorio</label>
-                                    <select name="publishers" id="edit-publishers" class="form-control" >
+                                    <select name="epublishers" id="epublishers" class="form-control" >
                                         <?php   foreach($publishers as $row): ?>
                                             <option value="<?php echo $row->id ?>"> <?php echo $row->nome ?></option>
                                         <?php endforeach; ?>
@@ -248,7 +248,7 @@
                                 <div class="form-group">
                                     <label>Plataformas</label>&nbsp;&nbsp;
                                     <label class="error" id="edit-error_plataformas"> Campo Obrigatorio</label>
-                                    <select name="plataformas" id="edit-plataformas" class="form-control" >
+                                    <select name="eplataformas" id="eplataformas" class="form-control" >
                                         <?php   foreach($plataformas as $row): ?>
                                             <option value="<?php echo $row->id ?>"> <?php echo $row->nome ?></option>
                                         <?php endforeach; ?>

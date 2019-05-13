@@ -65,15 +65,17 @@ class Admin extends CI_Controller {
 
     }
     function novo_jogo(){
-        $this->ajax_checking();
-
+    $this->ajax_checking();
         $postData = $this->input->post();
-        echo var_dump($postData);
-        $insert = $this->admin_model->insert_jogo($postData);
-        if($insert['status'] == 'success')
-            $this->session->set_flashdata('success', 'Jogo '.$postData['jogo'].' Foi criado com sucesso!');
+   
+   //  echo var_dump($postData);
+       $insert = $this->admin_model->insert_jogo($postData);
+           if($insert['status'] == 'success')
+            $this->session->set_flashdata('success', 'Jogo '.$postData['njogo'].' Foi criado com sucesso!');
 
+  
         echo json_encode($insert);
+    
     }
 
     function create_usuario(){
@@ -86,6 +88,18 @@ class Admin extends CI_Controller {
             $this->session->set_flashdata('success', 'Usuario '.$postData['email'].' Foi criado com sucesso!');
 
         echo json_encode($insert);
+    }
+
+
+    function update_jogo(){
+        $this->ajax_checking();
+
+        $postData = $this->input->post();
+        $update = $this->admin_model->update_jogo($postData);
+        if($update['status'] == 'success')
+            $this->session->set_flashdata('success', 'Jogo '.$postData['jogo'].' Foi alterado com sucesso!');
+
+        echo json_encode($update);
     }
 
     function update_usuario(){
