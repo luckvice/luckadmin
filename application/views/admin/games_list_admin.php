@@ -201,7 +201,7 @@
                         <h4 class="modal-title" id="myModalLabel">Atualizar Jogo</h4>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden"  id="edit-jogo-id" value=""/>
+                        <input type="hidden"  id="edit_jogo_id" value=""/>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">

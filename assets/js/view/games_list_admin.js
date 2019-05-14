@@ -35,7 +35,7 @@
      } );
 
     function editar_jogo_popup(id, jogo, plataforma, desenvolvedor, dev_id, publisher, ps_id, plataforma, p_id,){
-        $( "#ejogo-id" ).val(id);
+        $( "#edit_jogo_id" ).val(id);
         $( "#ejogo" ).val(jogo);
         $( "#edesenvolvedora" ).val(desenvolvedor);
         $( "#dev_id" ).val(dev_id);
@@ -99,7 +99,7 @@
         var edesenvolvedora = $('#edesenvolvedora').val();
         var eplataforma = $('#epublishers').val();
         var epublishers = $('#epublishers').val();
-
+        var edit_jogo_id = $('#edit_jogo_id').val();
 
        
         if(i == 0){
@@ -108,16 +108,13 @@
                 traditional: true,
                 type: "post",
                 dataType: "text",
-                data: {ejogo: ejogo, edesenvolvedora:edesenvolvedora, eplataforma:eplataforma, epublishers:epublishers},
+                data: {edit_jogo_id:edit_jogo_id, ejogo: ejogo, edesenvolvedora:edesenvolvedora, eplataforma:eplataforma, epublishers:epublishers},
                 success: function (result) {
                     var result = $.parseJSON(result);
                     if(result.status=='success'){
                         location.reload();
                     }
-                    else if(result.status=='exist'){
-                        $("#edit-error_email2").show();
-                        hide_loading();
-                    }
+                   
                     else{
                         alert("Ocorreu um erro!");
                     }

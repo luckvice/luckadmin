@@ -156,19 +156,22 @@ class Admin_model extends CI_Model {
                 'nome'          => $postData['ejogo'],
                 'desenv_id'     => $postData['edesenvolvedora'],
                 'publishers_id' => $postData['epublishers'],
+                'cat_id'        =>   1,
+                'status'        =>  1,
                 'plataform_id'  => $postData['eplataformas'],
          
             );
-            $this->db->where('id', $postData['edit-jogo-id']);
-            $this->db->update('jogos', $data);
 
-            $module = "Gerenciamento de jogos";
-            $activity = "Update new game ".$postData['ejogo'];
-            $this->insert_log($activity, $module);
-            return array('status' => 'success', 'message' => '');
+          //  $this->db->where('id', $postData['edit_jogo_id']);
+          //  $this->db->update('jogos', $data);
+
+    //        $module = "Gerenciamento de jogos";
+     //       $activity = "Update new game ".$postData['ejogo'];
+     //       $this->insert_log($activity, $module);
+          //  return array('status' => 'success', 'message' => '', 'consolelog'=>console.log($data));
 
       
-            return array('status' => 'exist', 'message' => '');
+       //     return array('status' => 'exist', 'message' => '');
         
 
     }
